@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 /* The RX and TX channels are configured independently for these parameters */
 struct channel_config
@@ -140,8 +141,8 @@ int sync_rx_example(struct bladerf *dev)
         {
             /* Process these samples, and potentially produce a response
              * to transmit */
-            done = do_work(rx_samples, samples_len, &have_tx_data, tx_samples,
-                           samples_len);
+            /* done = do_work(rx_samples, samples_len, &have_tx_data, tx_samples,
+                           samples_len); */
             if (!done && have_tx_data)
             {
                 /* Transmit a response */
