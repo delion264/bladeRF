@@ -27,7 +27,9 @@ struct stream_config
 };
 
 int configure_channel(struct bladerf *dev, struct channel_config *c);
-static int init_sync(struct bladerf *dev, struct stream_config *s);
+static int sync_config_rx(struct bladerf *dev, struct stream_config *s);
+static int sync_config_tx(struct bladerf *dev, struct stream_config *s);
 int sync_rx(struct bladerf *dev, struct stream_config *s);
+int sync_tx(struct bladerf *dev, struct stream_config *s);
 
 #endif

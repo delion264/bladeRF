@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
     st_config.buffer_size = 8192;
     st_config.num_transfers = 8;
     st_config.timeout_ms = 3500;
-
+    st_config.format = BLADERF_FORMAT_SC16_Q11_META;
     /* Application code goes here.
      *
      * Don't forget to call bladerf_enable_module() before attempting to
