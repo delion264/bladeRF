@@ -22,14 +22,15 @@ struct stream_config
     unsigned int buffer_size; /* Must be a multiple of 1024 */
     unsigned int num_transfers;
     unsigned int timeout_ms;
+    unsigned int samples_len;
     bladerf_format format;
     bool schedule;
 };
 
 int configure_channel(struct bladerf *dev, struct channel_config *c);
-static int sync_config_rx(struct bladerf *dev, struct stream_config *s);
-static int sync_config_tx(struct bladerf *dev, struct stream_config *s);
-int sync_rx(struct bladerf *dev, struct stream_config *s);
-int sync_tx(struct bladerf *dev, struct stream_config *s);
+static int sync_config_rx(struct bladerf *dev, const struct stream_config *s);
+static int sync_config_tx(struct bladerf *dev, const struct stream_config *s);
+int sync_rx(struct bladerf *dev, const struct stream_config *s);
+int sync_tx(struct bladerf *dev, const struct stream_config *s);
 
 #endif

@@ -11,7 +11,6 @@ int main(int argc, char *argv[])
 {
     int status, sync;
     struct channel_config ch_config;
-    struct stream_config st_config;
     struct bladerf *dev = NULL;
     struct bladerf_devinfo dev_info;
 
@@ -65,11 +64,11 @@ int main(int argc, char *argv[])
      * RX via bladerf_sync_rx() until a block of `buffer_size` samples has been
      * received.
      */
-    st_config.num_buffers = 16;
-    st_config.buffer_size = 8192;
-    st_config.num_transfers = 8;
-    st_config.timeout_ms = 3500;
-    st_config.format = BLADERF_FORMAT_SC16_Q11_META;
+    const struct stream_config st_config = {.num_buffers = 16,
+                                            .buffer_size = 8192,
+                                            .num_transfers = 8,
+                                            .timeout_ms = 3500,
+                                            .samples_len = 10000};
     /* Application code goes here.
      *
      * Don't forget to call bladerf_enable_module() before attempting to
