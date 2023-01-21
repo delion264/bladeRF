@@ -1,5 +1,9 @@
 #include "boilerplate.h"
-/* Usage:
+
+/*
+ * Compiled with command gcc -Wall -Werror -o libbladeRF_boilerplate boilerplate_main.c boilerplate.c -lbladeRF
+ *
+ * Usage:
  * libbladeRF_example_boilerplate [serial #]
  *
  * If a serial number is supplied, the program will attempt to open the
@@ -76,6 +80,7 @@ int main(int argc, char *argv[])
      * bladerf_enable_module() is called in sync_rx()
      */
     sync = sync_rx(dev, &st_config);
+    printf("%d\n", sync);
 
 out:
     bladerf_close(dev);

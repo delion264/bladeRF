@@ -15,12 +15,18 @@ int main(int argc, char *argv[])
     bladerf_frequency freq;
     float frequency;
 
+    printf("Segfault here?\n");
+
     range->max = MAX_FREQUENCY;
     range->min = MIN_FREQUENCY;
     range->step = BANDWIDTH;
     range->scale = 1;
 
+    printf("Segfault after initialising range struct?\n");
+
     const struct bladerf_range *range_ptr = range;
+
+    printf("Segfault after assigning range_ptr to range\n");
 
     status = bladerf_open(&dev, NULL);
     if (status != 0)

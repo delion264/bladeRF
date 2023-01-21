@@ -46,7 +46,7 @@ int configure_channel(struct bladerf *dev, struct channel_config *c)
 /* Configure both the device's x1 RX and TX channels for use with the
  * synchronous
  * interface. SC16 Q11 samples *without* metadata are used. */
-static int sync_config_rx(struct bladerf *dev, const struct stream_config *s)
+int sync_config_rx(struct bladerf *dev, const struct stream_config *s) // formerly static int sync_config_rx()
 {
     int status = bladerf_sync_config(dev, BLADERF_RX_X1, s->format,
                                      s->num_buffers, s->buffer_size, s->num_transfers,
@@ -55,11 +55,11 @@ static int sync_config_rx(struct bladerf *dev, const struct stream_config *s)
     {
         fprintf(stderr, "Failed to configure RX sync interface: %s\n",
                 bladerf_strerror(status));
-        return status;
     }
+    return status;
 }
 
-static int sync_config_tx(struct bladerf *dev, const struct stream_config *s)
+int sync_config_tx(struct bladerf *dev, const struct stream_config *s) // formerly static int sync_config_tx()
 {
     int status = bladerf_sync_config(dev, BLADERF_TX_X1, s->format,
                                      s->num_buffers, s->buffer_size, s->num_transfers,
@@ -128,7 +128,7 @@ int sync_tx(struct bladerf *dev, const struct stream_config *s)
 {
     int status, ret;
     // bool done = false;
-    bool have_tx_data = false;
+    // bool have_tx_data = false;
     // bool flag_meta = (s->format == BLADERF_FORMAT_SC16_Q11) ? false : true;
 
     /* "User" samples buffers and their associated sizes, in units of samples.
