@@ -73,6 +73,7 @@ int main(int argc, char *argv[])
      *
      * Don't forget to call bladerf_enable_module() before attempting to
      * transmit or receive samples!
+     * bladerf_enable_module() is called in sync_rx()
      */
     sync = sync_rx(dev, &st_config);
 
