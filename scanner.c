@@ -2,25 +2,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MIN_FREQUENCY 900e6
-#define MAX_FREQUENCY 910e6
-#define BANDWIDTH 1e6
-#define SAMPLERATE 1e6
+#define MIN_FREQUENCY 800e6
+#define MAX_FREQUENCY 900e6
+#define BANDWIDTH 5e6
+#define SAMPLERATE 12e6
 
 int main(int argc, char *argv[])
 {
     int status;
     struct bladerf *dev;
-    struct bladerf_range *range = NULL;
-    bladerf_frequency freq;
-    float frequency;
+    struct bladerf_range range = {.max = MAX_FREQUENCY,
+                                  .min = MIN_FREQUENCY,
+                                  .step = BANDWIDTH,
+                                  .scale = 1};
+    bladerf_frequency freq; // frequency of the device
+    float frequency;        // counter variable
+    bladerf_channel ch = BLADERF_RX_X1;
+    int32_t *preamble = NULL;
+    int32_t *symbol = NULL;
 
-    range->max = MAX_FREQUENCY;
-    range->min = MIN_FREQUENCY;
-    range->step = BANDWIDTH;
-    range->scale = 1;
-
-    const struct bladerf_range *range_ptr = range;
+    const struct bladerf_range *range_ptr = &range;
 
     status = bladerf_open(&dev, NULL);
     if (status != 0)
@@ -71,6 +72,7 @@ int main(int argc, char *argv[])
         if (freq > 0)
         {
             printf("Transmitting frequency found: %g MHz\n", (float)freq / 1e6);
+            // printf("%d\n", bladerf_get_rfic_rssi(dev, ch, preamble, symbol));
         }
     }
 
